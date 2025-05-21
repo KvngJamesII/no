@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "users": {
+      ".indexOn": ["username", "status"],
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "(auth != null && auth.uid === $uid) || root.child('users').child(auth.uid).child('username').val() === '7073260074'"
+      }
+    },
+    "emails": {
+      "$uid": {
+        ".indexOn": ["active", "createdAt"],
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "(auth != null && auth.uid === $uid) || root.child('users').child(auth.uid).child('username').val() === '7073260074'"
+      }
+    },
+    "ip_tracking": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('username').val() === '7073260074'",
+      ".write": "auth != null"
+    }
+  }
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OxMail - Get 50+ Free Temporary Emails">
+    <meta name="theme-color" content="#4a00e0">
+    <title>OxMail - Temporary Email Service</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/assets/logo.svg">
+    
+    <!-- Firebase SDKs -->
+    <!-- Empty as we will use the scripts at the bottom of the page -->
+</head>
+<body class="light-theme">
+    <!-- App Shell -->
+    <div id="app">
+        <!-- Auth Pages -->
+        <section id="auth-pages" class="page active-page">
+            <!-- Login Page -->
+            <div id="login-page" class="auth-container">
+                <div class="logo-container">
+                    <i class="fas fa-envelope-open-text logo-icon"></i>
+                    <h1 class="logo-text">OxMail</h1>
+                </div>
+                <p class="tagline" data-i18n="get_free_emails">Get 50+ Free Emails</p>
+                
+                <div class="auth-card">
+                    <h2 data-i18n="login">Login</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-username" data-i18n="username">Username</label>
+                            <div class="input-group">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="login-username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password" data-i18n="password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="login-password" required>
+                                <i class="fas fa-eye toggle-password"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary-btn" data-i18n="login">Login</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p data-i18n="no_account">Don't have an account?</p>
+                        <button id="show-signup" class="btn text-btn" data-i18n="signup">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signup Page -->
+            <div id="signup-page" class="auth-container hidden">
+                <div class="logo-container">
+                    <i class="fas fa-envelope-open-text logo-icon"></i>
+                    <h1 class="logo-text">OxMail</h1>
+                </div>
+                <p class="tagline" data-i18n="get_free_emails">Get 50+ Free Emails</p>
+                
+                <div class="auth-card">
+                    <h2 data-i18n="signup">Sign Up</h2>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-username" data-i18n="username">Username</label>
+                            <div class="input-group">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="signup-username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password" data-i18n="password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="signup-password" required>
+                                <i class="fas fa-eye toggle-password"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-confirm-password" data-i18n="confirm_password">Confirm Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="signup-confirm-password" required>
+                                <i class="fas fa-eye toggle-password"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary-btn" data-i18n="create_account">Create Account</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p data-i18n="have_account">Already have an account?</p>
+                        <button id="show-login" class="btn text-btn" data-i18n="login">Login</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard-page" class="page">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <i class="fas fa-envelope-open-text logo-icon-small"></i>
+                    <h1 class="logo-text-small">OxMail</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button id="toggle-language" class="icon-btn">
+                            <i class="fas fa-globe"></i>
+                        </button>
+                        <button id="toggle-theme" class="icon-btn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button id="logout-btn" class="icon-btn">
+                            <i class="fas fa-door-open"></i>
+                        </button>
+                        <div id="language-dropdown" class="dropdown hidden">
+                            <ul>
+                                <li data-lang="en">English</li>
+                                <li data-lang="fr">Français</li>
+                                <li data-lang="es">Español</li>
+                            </ul>
+                        </div>
+                        <button id="upgrade-btn" class="btn upgrade-btn" data-i18n="upgrade">Upgrade</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="generate" data-i18n="generate_email">Generate Email</div>
+                    <div class="tab inbox-tab" data-tab="inbox">
+                        <span data-i18n="inbox">Inbox</span>
+                        <span class="notification-badge hidden">0</span>
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Generate Email Tab -->
+                    <div id="generate-tab" class="tab-pane active">
+                        <div class="email-card">
+                            <h2 data-i18n="generate_temp_email">Generate Temporary Email</h2>
+                            <div class="current-email">
+                                <p data-i18n="current_email">Current Email:</p>
+                                <div class="email-display" id="current-email">
+                                    <span class="placeholder" data-i18n="no_active_email">No active email</span>
+                                </div>
+                                <div class="email-actions">
+                                    <button id="copy-email" class="btn secondary-btn" data-i18n="copy">Copy</button>
+                                    <button id="generate-email" class="btn primary-btn" data-i18n="generate">Generate</button>
+                                </div>
+                            </div>
+                            <div id="generation-limit" class="usage-limit">
+                                <p class="limit-display" data-i18n="email_limit">Email Generation Limit: <span id="email-count">0</span>/7</p>
+                            </div>
+                            <div id="countdown-timer" class="countdown hidden">
+                                <p class="upgrade-note" data-i18n="upgrade_to_keep">Your previous email expires once you generate a new one. Upgrade to Pro to keep it permanent!</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Email History Section -->
+                        <div class="history-card">
+                            <div class="history-header">
+                                <h2 data-i18n="email_history">Email History</h2>
+                                <div class="filter-container">
+                                    <input type="text" id="history-search" placeholder="Search emails..." data-i18n-placeholder="search_emails">
+                                    <select id="history-filter">
+                                        <option value="all" data-i18n="all">All</option>
+                                        <option value="active" data-i18n="active">Active</option>
+                                        <option value="inactive" data-i18n="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="history-list" id="email-history">
+                                <div class="empty-state">
+                                    <i class="fas fa-history empty-icon"></i>
+                                    <p data-i18n="no_email_history">No email history yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inbox Tab -->
+                    <div id="inbox-tab" class="tab-pane">
+                        <div class="inbox-card">
+                            <div class="inbox-header">
+                                <h2 data-i18n="inbox">Inbox</h2>
+                                <div class="inbox-actions">
+                                    <button id="refresh-inbox" class="btn primary-btn">
+                                        <i class="fas fa-sync-alt"></i>
+                                        <span data-i18n="refresh">Refresh</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="loading-bar hidden" id="loading-bar">
+                                <div class="loading-progress"></div>
+                            </div>
+                            <div class="inbox-list" id="inbox-list">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox empty-icon"></i>
+                                    <p data-i18n="no_messages">No messages yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Detail Modal -->
+            <div id="message-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="message-subject"></h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="message-info">
+                            <p><strong data-i18n="from">From</strong>: <span id="message-from"></span></p>
+                            <p><strong data-i18n="to">To</strong>: <span id="message-to"></span></p>
+                        </div>
+                        <div class="message-content" id="message-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Upgrade Page -->
+        <section id="premium-page" class="page">
+            <div class="premium-container">
+                <button class="back-btn" id="premium-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="premium-card">
+                    <div class="premium-header">
+                        <i class="fas fa-crown premium-icon"></i>
+                        <h2 data-i18n="upgrade_premium">Upgrade To Premium</h2>
+                        <p data-i18n="exclusive_benefits">To Enjoy Exclusive Benefits</p>
+                    </div>
+                    <div class="premium-pricing">
+                        <div class="pricing-option active" data-plan="monthly">
+                            <h3 data-i18n="monthly">Monthly</h3>
+                            <p class="price">₦1,000</p>
+                        </div>
+                        <div class="pricing-option" data-plan="yearly">
+                            <h3 data-i18n="yearly">Yearly</h3>
+                            <p class="price">₦10,000</p>
+                            <span class="savings" data-i18n="save_2_months">Save 2 months!</span>
+                        </div>
+                    </div>
+                    <div class="premium-benefits">
+                        <div class="benefit">
+                            <i class="fas fa-infinity benefit-icon"></i>
+                            <p data-i18n="unlimited_emails">Generate Unlimited emails</p>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle benefit-icon"></i>
+                            <p data-i18n="remain_active">All Email Will Remain Active</p>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-shield-alt benefit-icon"></i>
+                            <p data-i18n="no_deletion">No Email Will Be Erased/Deleted</p>
+                        </div>
+                    </div>
+                    <button id="pay-btn" class="btn primary-btn" data-i18n="pay_now">Pay Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="admin-page" class="page">
+            <header class="admin-header">
+                <div class="header-left">
+                    <i class="fas fa-envelope-open-text logo-icon-small"></i>
+                    <h1 class="logo-text-small">OxMail Admin</h1>
+                </div>
+                <div class="header-right">
+                    <button id="admin-logout" class="btn secondary-btn" data-i18n="logout">Logout</button>
+                </div>
+            </header>
+
+            <div class="admin-dashboard">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-icon"></i>
+                        <div class="stat-info">
+                            <h3 data-i18n="total_users">Total Users</h3>
+                            <p id="total-users-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-user-plus stat-icon"></i>
+                        <div class="stat-info">
+                            <h3 data-i18n="new_users">New Users Today</h3>
+                            <p id="new-users-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-crown stat-icon"></i>
+                        <div class="stat-info">
+                            <h3 data-i18n="premium_users">Premium Users</h3>
+                            <p id="premium-users-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="users-container">
+                    <div class="users-header">
+                        <h2 data-i18n="user_management">User Management</h2>
+                        <div class="users-search">
+                            <input type="text" id="user-search" placeholder="Search users..." data-i18n-placeholder="search_users">
+                        </div>
+                    </div>
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="username">Username</th>
+                                    <th data-i18n="status">Status</th>
+                                    <th data-i18n="created_on">Created On</th>
+                                    <th data-i18n="emails_generated">Emails Generated</th>
+                                    <th data-i18n="actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- User rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast hidden"></div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Paystack Script -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/ui-utils.js"></script>
+    <script src="js/ip-detection.js"></script>
+    <script src="js/email-service.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+    <script src="service-worker.js"></script>
+</body>
+</html>

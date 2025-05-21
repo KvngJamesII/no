@@ -1,0 +1,17 @@
+Firebase Authentication Setup Guide
+
+1. Go to your Firebase Console: https://console.firebase.google.com/
+2. Select your "soccerx" project
+3. In the left menu, click on "Authentication"
+4. Click on the "Sign-in method" tab
+5. Enable the "Email/Password" provider (click on it and toggle the "Enable" switch)
+6. Save the changes
+
+Next, ensure your app's domains are authorized:
+
+1. Still in Authentication, click on the "Settings" tab
+2. Find the "Authorized domains" section
+3. Add your Replit domain (e.g., "f4bc0a0e-69d7-4ab3-974e-071c60bf8409-00-2uwms339hn8qq.riker.replit.dev")
+4. Save the changes
+
+This will allow the sign-up and login processes to work correctly with your application.

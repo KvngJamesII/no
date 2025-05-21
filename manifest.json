@@ -1,0 +1,52 @@
+{
+  "name": "OxMail - Temporary Email Service",
+  "short_name": "OxMail",
+  "description": "Get 50+ Free Temporary Emails with premium features",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#4a00e0",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/assets/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity", "communication"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Generate Email",
+      "short_name": "Generate",
+      "description": "Generate a new temporary email",
+      "url": "/index.html#generate",
+      "icons": [
+        {
+          "src": "https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/assets/logo.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Check Inbox",
+      "short_name": "Inbox",
+      "description": "View your email inbox",
+      "url": "/index.html#inbox",
+      "icons": [
+        {
+          "src": "https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/assets/logo.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
